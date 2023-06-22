@@ -1,6 +1,28 @@
 class RegexFunctionsVerify {
-  static verifyName() {}
-  static verifyEmail() {}
+  static verifyUsername(username) {
+    const usernameRegex = /^[a-z]{2,10}$/;
+    let tableErrors = [];
+    if (!username.match(usernameRegex)) {
+      tableErrors.push({
+        level: 1,
+        message: "Votre nom d'utilisateur doit etre entre 2 et 8 caracteres",
+      });
+    }
+
+    return tableErrors;
+  }
+  static verifyEmail(email) {
+    const emailRegex = /^\w*@[a-z]+\.[a-z]{2,}$/;
+    let tableErrors = [];
+    if (!email.match(emailRegex)) {
+      tableErrors.push({
+        level: 1,
+        message: "Mauvais format  email",
+      });
+    }
+
+    return tableErrors;
+  }
 
   static verifyPassword(password) {
     const mdpRegex = /(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9]).{8}/;
@@ -35,6 +57,18 @@ class RegexFunctionsVerify {
           message: "Votre mot de passe doit contenir 8 caracteres",
         });
       }
+    }
+
+    return tableErrors;
+  }
+  static passwordMatching(firstPassword , secondPassword) {
+
+    let tableErrors = [];
+    if (!secondPassword.match(firstPassword)) {
+      tableErrors.push({
+        level: 1,
+        message: "Les mots de passe ne correspondent pas",
+      });
     }
 
     return tableErrors;
